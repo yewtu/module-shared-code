@@ -10,9 +10,14 @@ const usersMap = {
     userName: 'tastyburger'
   },
   waitsandspencer: {
-    role: 'restaurant-buyer',
+    role: 'retail-buyer',
     displayName: 'Waits & Spencer',
     userName: 'waitsandspencer'
+  },
+  saffronbadger: {
+    role: 'restaurant-buyer',
+    displayName: 'The Saffron Badger',
+    userName: 'saffronbadger'
   }
 };
 
