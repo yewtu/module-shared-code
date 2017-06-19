@@ -11,7 +11,7 @@ const usersMap = {
   }
 };
 
-export default (req, res) => {
+module.exports = (req, res) => {
   const referrer = req.get('Referrer');
   const user = usersMap[req.body.username];
   user && res.cookie('yewtuAuth', JSON.stringify(user));
