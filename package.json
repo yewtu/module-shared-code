@@ -1,0 +1,8 @@
+{
+  "name": "module-shared-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:yewtu/module-shared-code.git",
+  "author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
+  "license": "MIT"
+}
