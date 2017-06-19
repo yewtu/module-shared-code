@@ -8,6 +8,11 @@ const usersMap = {
     role: 'retail-buyer',
     displayName: 'Tasty Burger',
     userName: 'tastyburger'
+  },
+  waitsandspencer: {
+    role: 'restaurant-buyer',
+    displayName: 'Waits & Spencer',
+    userName: 'waitsandspencer'
   }
 };
 
