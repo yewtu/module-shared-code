@@ -22,7 +22,7 @@ const usersMap = {
 };
 
 module.exports = (req, res) => {
-  const referrer = req.get('Referrer');
+  const referrer = req.query.redirect || req.get('Referrer');
   const user = usersMap[req.body.username];
   user && res.cookie('yewtuAuth', JSON.stringify(user));
   res.redirect(303, referrer);
