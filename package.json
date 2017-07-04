@@ -5,5 +5,7 @@
   "repository": "git@github.com:yewtu/module-shared-code.git",
   "author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "eslint-config-imperative-es6": "^1.0.0"
+  }
 }
