@@ -8,6 +8,7 @@
   "extends": [ "imperative-es6" ],
   "rules":{
     "eol-last": "off",
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "no-unused-expressions": "off"
   }
 }
