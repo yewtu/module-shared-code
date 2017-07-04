@@ -1,0 +1,17 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": [ "plugin:react/recommended", "imperative-es6" ],
+  "rules":{
+    "eol-last": "off",
+    "no-case-declarations": "off"
+  }
+}
