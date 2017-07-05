@@ -9,7 +9,6 @@
   "rules":{
     "eol-last": "off",
     "no-case-declarations": "off",
-    "no-unused-expressions": "off",
-    "excludedFiles": "*.tests.js"
+    "no-unused-expressions": "off"
   }
 }
