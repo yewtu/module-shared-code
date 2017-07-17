@@ -6,7 +6,9 @@
   "author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
   "license": "MIT",
   "dependencies": {
+    "babel-register": "^6.24.1",
     "eslint": "^4.1.1",
-    "eslint-config-imperative-es6": "yewtu/eslint-config-imperative-es6#format-fix"
+    "eslint-config-imperative-es6": "yewtu/eslint-config-imperative-es6#format-fix",
+    "jsdom": "^11.1.0"
   }
 }
