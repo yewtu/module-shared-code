@@ -1,8 +1,31 @@
 module.exports = {
-    resources: {
-	    service-marketplace : 0.0.0.0:3004,
-	    app-marketplace: 0.0.0.0:3002,
-	    app-shopfront: 0.0.0.0:3003,
-	    service-b2c-store: 0.0.0.0:3001
-    }
+	resources: {
+		[
+
+			{
+				name: "service-marketplace",
+				URI: {
+					local: "http://0.0.0.0:3004"
+				}
+			},
+			{
+				name: "app-marketplace",
+				URI: { 
+					local: "http://0.0.0.0:3002" 
+				}
+			},
+			{
+				name: "app-shopfront",
+				URI: {
+					local: "http://0.0.0.0:3003"
+				},
+			},
+			{
+				name: "service-b2c-store",
+				URI: {
+					local: "http://0.0.0.0:3001"
+				}	
+			},
+		]
+	}
 }
