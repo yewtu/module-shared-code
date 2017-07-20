@@ -1,8 +1,39 @@
 module.exports = {
     resources: [
-        {
-            name: "service-marketplace",
-            URI: "https://yewtu-service-marketplace.herokuapp.com"
-        },
+		{
+			name: "app-b2c-store",
+			URI: "http://app-b2c-store-staging.herokuapp.com"
+
+		},
+		{
+			name: "service-marketplace",
+			URI: "https://service-marketplace-staging.herokuapp.com"
+
+		},
+		{
+			name: "app-marketplace",
+			URI: "http://app-marketplace-staging.herokuapp.com"
+
+		},
+		{
+			name: "app-shopfront",
+			URI: "http://app-b2c-shopfront-staging.herokuapp.com"
+
+		},
+		{
+			name: "service-b2c-store",
+			URI: "http://service-b2c-store-staging.herokuapp.com"
+
+		},
+		{
+			name: "app-cow-publisher",
+			URI: "http://app-cow-publisher-staging.herokuapp.com"
+
+		},
+		{
+			name: "app-b2b-marketplace",
+			URI: "http://app-b2b-marketplace-staging.herokuapp.com"
+
+		},
     ]
 };
