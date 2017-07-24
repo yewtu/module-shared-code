@@ -35,5 +35,10 @@ module.exports = {
 			URI: "http://0.0.0.0:3006"
 
 		},
+		{
+			name: "service-b2b-marketplace",
+			URI: "http://0.0.0.0:3007"
+
+		}
     ]
 };

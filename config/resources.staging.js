@@ -35,5 +35,10 @@ module.exports = {
 			URI: "http://app-b2b-marketplace-staging.herokuapp.com"
 
 		},
+		{
+			name: "service-b2b-marketplace",
+			URI: "http://service-b2b-market-staging.herokuapp.com"
+
+		}
     ]
 };
