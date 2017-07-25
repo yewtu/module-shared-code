@@ -38,7 +38,10 @@ module.exports = {
 		{
 			name: "service-b2b-marketplace",
 			URI: "http://0.0.0.0:3007"
-
-		}
+		},
+        {
+            name: "app-imploder",
+            URI: "http://0.0.0.0:3008"
+        }
     ]
 };

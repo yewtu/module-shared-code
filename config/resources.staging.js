@@ -38,7 +38,10 @@ module.exports = {
 		{
 			name: "service-b2b-marketplace",
 			URI: "http://service-b2b-market-staging.herokuapp.com"
-
-		}
+		},
+        {
+            name: "app-imploder",
+            URI: "https://yewtu-imploder-staging.herokuapp.com/imploder"
+        }
     ]
 };
