@@ -41,7 +41,7 @@ module.exports = {
 		},
         {
             name: "app-imploder",
-            URI: "https://yewtu-imploder-staging.herokuapp.com/imploder"
+            URI: "https://yewtu-imploder-staging.herokuapp.com"
         }
     ]
 };
