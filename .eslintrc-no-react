@@ -9,6 +9,7 @@
   "rules":{
     "eol-last": "off",
     "no-case-declarations": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+	"semi": "error"
   }
 }
