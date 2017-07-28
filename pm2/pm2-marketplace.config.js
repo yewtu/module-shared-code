@@ -1,3 +1,6 @@
+/*
+Copy this file to the folder one level above the repos, then run with 'pm2 start pm2-marketplace.config.js'
+ */
 module.exports = {
 	apps: [
 		{
