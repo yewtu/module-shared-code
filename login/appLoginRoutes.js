@@ -1,4 +1,4 @@
-const readLoggedInUserFromCookie = require('./helpers/readLoggedInUserFromCookie');
+const readLoggedInUserFromCookie = require('./helpers/readLoggedInUserFromRequest');
 const writeLoggedInUserToCookie = require('./helpers/writeLoggedInUserToCookie');
 const logoutUser = require('./helpers/logoutUser');
 
