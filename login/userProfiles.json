@@ -4,13 +4,19 @@
 		"displayName": "Farmer A",
 		"userName": "farmerA",
 		"farm": "gorse-farm",
-		"avatarFile": "avatar-david.jpg"
+		"avatarFile": "avatar-david.jpg",
+		"linkedFarms": [
+			"gorse-farm"
+		]
 	},
 	"farmerB": {
 		"role": "farmer",
 		"displayName": "Farmer B",
 		"userName": "farmerB",
-		"farm": "youngstock-farm"
+		"farm": "youngstock-farm",
+		"linkedFarms": [
+			"youngstock-farm"
+		]
 	},
 	"waitsandspencer": {
 		"role": "retailer",
