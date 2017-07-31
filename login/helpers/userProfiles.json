@@ -15,7 +15,11 @@
 		"userName": "farmerB",
 		"farm": "youngstock-farm",
 		"linkedFarms": [
-			"youngstock-farm"
+			"youngstock-farm",
+			"nightfall-farm",
+			"church-farm",
+			"old-stone-farm",
+			"southwind-farm"
 		]
 	},
 	"waitsandspencer": {
