@@ -4,8 +4,8 @@ const request = require('./request');
 const AdminRoutes = require("./express/routes/admin-routes");
 
 module.exports = {
-	appLoginRoutes,
-	apiAuthMiddleware,
-	AdminRoutes,
-	request
+	appLoginRoutes: appLoginRoutes,
+	apiAuthMiddleware: apiAuthMiddleware,
+	AdminRoutes: AdminRoutes,
+	request: request
 };
