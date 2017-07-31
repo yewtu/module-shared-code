@@ -3,16 +3,18 @@ const axios = require('axios');
 // catch here or axios will create a much more verbose error message
 // add option to not rethrow the error. This is useful if the caller is a Promise.all and we want to collect all
 // successful requests as well as this failure
-const logError = (err, endpoint, options = {}) => {
+const logError = function (err, endpoint, options) {
+	options = options || {};
 	if (!options.noLog) {
-		console.error(err.response && err.response.status, `endpoint: ${endpoint}`, err.stack);
+		console.error(err.response && err.response.status, 'endpoint: ' + endpoint + ', ' + err.stack);
 		err.logged = true;
 	}
 	if (options.noRethrowErrors) return err;
 	throw err;
 };
 
-const requestConfig = (options = {}) => {
+const requestConfig = function (options) {
+	options = options || {};
 	const updatedOptions = Object.assign({}, options, {
 		headers: options.headers || {},
 		auth: {
@@ -24,26 +26,42 @@ const requestConfig = (options = {}) => {
 };
 
 module.exports = {
-	get: (endpoint, options) => {
+	get: function (endpoint, options) {
 		return axios.get(endpoint, requestConfig(options))
-			.then(response => response.data)
-			.catch(err => logError(err, endpoint, options));
+			.then(function (response) {
+				response.data
+			})
+			.catch(function (err) {
+				logError(err, endpoint, options)
+			});
 	},
 
-	post: (endpoint, data, options = {}) => {
+	post: function (endpoint, data, options) {
+		options = options || {};
 		return axios.post(endpoint, data, requestConfig(options))
-			.then(response => response.data)
-			.catch(err => logError(err, endpoint, options));
+			.then(function (response) {
+				response.data
+			})
+			.catch(function (err) {
+				logError(err, endpoint, options)
+			});
 	},
 
-	put: (endpoint, data, options = {}) => {
+	put: function (endpoint, data, options) {
+		options = options || {};
 		return axios.put(endpoint, data, requestConfig(options))
-			.then(response => response.data)
-			.catch(err => logError(err, endpoint, options));
+			.then(function (response) {
+				response.data
+			})
+			.catch(function (err) {
+				logError(err, endpoint, options)
+			});
 	},
 
-	del: (endpoint, options) => {
+	del: function (endpoint, options) {
 		return axios.delete(endpoint, requestConfig(options))
-			.catch(err => logError(err, endpoint, options));
+			.catch(function (err) {
+				logError(err, endpoint, options)
+			});
 	}
 }
