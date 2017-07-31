@@ -1,0 +1,36 @@
+{
+	"farmerA": {
+		"role": "farmer",
+		"displayName": "Farmer A",
+		"userName": "farmerA",
+		"farm": "gorse-farm",
+		"avatarFile": "avatar-david.jpg"
+	},
+	"farmerB": {
+		"role": "farmer",
+		"displayName": "Farmer B",
+		"userName": "farmerB",
+		"farm": "youngstock-farm"
+	},
+	"waitsandspencer": {
+		"role": "retailer",
+		"displayName": "Waits & Spencer",
+		"userName": "waitsandspencer",
+		"linkedFarms": [
+			"gorse-farm",
+			"youngstock-farm"
+		],
+		"b2cStore": true,
+		"avatarFile": "avatar-waitsandspencer.jpg"
+	},
+	"saffronbadger": {
+		"role": "retailer",
+		"displayName": "The Saffron Badger",
+		"userName": "saffronbadger",
+		"linkedFarms": [
+			"youngstock-farm"
+		],
+		"b2cStore": false,
+		"avatarFile": "avatar-saffronbadger.jpg"
+	}
+}
