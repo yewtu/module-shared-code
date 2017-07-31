@@ -1,9 +1,11 @@
-const loginRoutes = require('./login/loginRoutes');
-const getUserProfile = require('./login/getUserProfile');
+const appLoginRoutes = require('./login/appLoginRoutes');
+const apiAuthMiddleware = require('./login/apiAuthMiddleware');
+const request = require('./request');
 const AdminRoutes = require("./express/routes/admin-routes");
 
 module.exports = {
-	loginRoutes,
-	getUserProfile,
-	AdminRoutes
+	appLoginRoutes,
+	apiAuthMiddleware,
+	AdminRoutes,
+	request
 };

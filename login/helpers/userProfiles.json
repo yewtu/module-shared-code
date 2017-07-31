@@ -38,5 +38,14 @@
 		],
 		"b2cStore": false,
 		"avatarFile": "avatar-saffronbadger.jpg"
+	},
+	"test": {
+		"role": "test-user",
+		"displayName": "Test User",
+		"userName": "test",
+		"farm": "test-farm",
+		"linkedFarms": [
+			"test-farm"
+		]
 	}
 }
