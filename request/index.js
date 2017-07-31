@@ -29,7 +29,7 @@ module.exports = {
 	get: function (endpoint, options) {
 		return axios.get(endpoint, requestConfig(options))
 			.then(function (response) {
-				response.data
+				return response.data;
 			})
 			.catch(function (err) {
 				logError(err, endpoint, options)
@@ -40,7 +40,7 @@ module.exports = {
 		options = options || {};
 		return axios.post(endpoint, data, requestConfig(options))
 			.then(function (response) {
-				response.data
+				return response.data;
 			})
 			.catch(function (err) {
 				logError(err, endpoint, options)
@@ -51,7 +51,7 @@ module.exports = {
 		options = options || {};
 		return axios.put(endpoint, data, requestConfig(options))
 			.then(function (response) {
-				response.data
+				return response.data;
 			})
 			.catch(function (err) {
 				logError(err, endpoint, options)
