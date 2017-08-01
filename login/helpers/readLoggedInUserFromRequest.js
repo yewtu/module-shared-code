@@ -24,4 +24,6 @@ module.exports = (req, res, next) => {
 				errorType: 'USER_NOT_FOUND'
 			}));
 	}
+	res.locals.user = {};
+	return next();
 };
