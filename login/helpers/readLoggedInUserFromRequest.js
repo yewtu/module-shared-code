@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 				res.locals.user = userProfile;
 				return next();
 			})
-			.catch(err => res.status(404).send({
+			.catch(err => res.status(403).send({
 				message: err.message,
 				errorType: 'USER_NOT_FOUND'
 			}));

@@ -10,11 +10,11 @@ module.exports = app => {
 					res.locals.user = userProfile;
 					return next();
 				})
-				.catch(err => res.status(404).send({
+				.catch(err => res.status(403).send({
 					message: err.message,
 					errorType: 'USER_NOT_FOUND'
 				}));
-		return res.status(400).send({
+		return res.status(403).send({
 			message: 'No user credentials supplied',
 			errorType: 'NOT_LOGGED_IN'
 		});
