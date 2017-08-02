@@ -42,6 +42,10 @@ module.exports = {
         {
             name: "app-imploder",
             URI: "http://localhost:3008"
+        },
+        {
+            name: "service-imploder",
+            URI: "http://localhost:3009"
         }
     ]
 };
