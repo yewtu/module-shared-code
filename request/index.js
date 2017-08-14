@@ -18,7 +18,8 @@ const requestConfig = function (options) {
 	const updatedOptions = Object.assign({}, options, {
 		headers: options.headers || {},
 		auth: {
-			username: options.userName
+			username: options.userName,
+			password: options.password
 		}
 	});
 	if (typeof window !== 'undefined') updatedOptions.headers['X-Requested-With'] = 'XMLHttpRequest';
