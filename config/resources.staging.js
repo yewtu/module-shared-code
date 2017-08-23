@@ -46,6 +46,10 @@ module.exports = {
         {
             name: "service-imploder",
             URI: "https://service-imploder-staging.herokuapp.com"
+        },
+        {
+            name: "service-optimizer",
+            URI: "https://service-optimizer.herokuapp.com"
         }
     ]
 };
