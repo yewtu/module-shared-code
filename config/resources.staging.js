@@ -50,6 +50,14 @@ module.exports = {
         {
             name: "service-optimizer",
             URI: "https://service-optimizer.herokuapp.com"
+        },
+        {
+            name: "service-farm",
+            URI: "https://service-farm.herokuapp.com"
+        },
+        {
+            name: "app-farm",
+            URI: "https://app-farm.herokuapp.com"
         }
     ]
 };

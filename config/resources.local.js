@@ -50,6 +50,14 @@ module.exports = {
         {
             name: "service-optimizer",
             URI: "http://localhost:3010"
+        },
+        {
+            name: "app-farm",
+            URI: "http://0.0.0.0:3011"
+        },
+        {
+            name: "service-farm",
+            URI: "http://localhost:3012"
         }
     ]
 };
