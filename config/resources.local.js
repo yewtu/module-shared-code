@@ -2,42 +2,42 @@ module.exports = {
     resources: [
 		{
 			name: "app-b2c-store",
-			URI: "http://0.0.0.0:3000"
+			URI: "http://localhost:3000"
 
 		},
         {
             name: "service-marketplace",
-            URI: "http://0.0.0.0:3004"
+            URI: "http://localhost:3004"
 
         },
         {
             name: "app-marketplace",
-            URI: "http://0.0.0.0:3002"
+            URI: "http://localhost:3002"
 
         },
         {
             name: "app-shopfront",
-            URI: "http://0.0.0.0:3003"
+            URI: "http://localhost:3003"
 
         },
         {
             name: "service-b2c-store",
-            URI: "http://0.0.0.0:3001"
+            URI: "http://localhost:3001"
 
         },
 		{
 			name: "app-cow-publisher",
-			URI: "http://0.0.0.0:3005"
+			URI: "http://localhost:3005"
 
 		},
 		{
 			name: "app-b2b-marketplace",
-			URI: "http://0.0.0.0:3006"
+			URI: "http://localhost:3006"
 
 		},
 		{
 			name: "service-b2b-marketplace",
-			URI: "http://0.0.0.0:3007"
+			URI: "http://localhost:3007"
 		},
         {
             name: "app-imploder",
@@ -53,7 +53,7 @@ module.exports = {
         },
         {
             name: "app-farm",
-            URI: "http://0.0.0.0:3011"
+            URI: "http://localhost:3011"
         },
         {
             name: "service-farm",
