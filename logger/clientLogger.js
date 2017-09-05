@@ -58,6 +58,7 @@ const createLogger = (logApiUri) => {
 
     const logger = {};
 
+    // TODO: maybe this should be separated to an other function named "listenToUncaughtErrors or logUncaughtErrors"
     window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
         if (arguments.length === 1 && messageOrEvent) {
             const convertedErrorEvent = createErrorEventLike(messageOrEvent);
