@@ -10,7 +10,9 @@ import axios from "axios";
  * @return {*}
  */
 const createErrorEventLike = (messageOrEvent, filename, lineno, colno, error) => {
-    if (error && error.stack && error.message) return error;
+    if (error && error.stack && error.message) {
+        return {stack: error.stack, message: error.message};
+    }
     if (messageOrEvent && messageOrEvent.stack && messageOrEvent.message) return messageOrEvent;
     return {
         message: messageOrEvent && messageOrEvent instanceof String ? messageOrEvent : "Undefined client-side error",
@@ -54,21 +56,21 @@ const postLogEvent = (logApiUri, logEvent) => {
 
 const createLogger = (logApiUri) => {
 
-    // Maybe this needs to be separated to a function like listenToGlobalErrors?
+    const logger = {};
+
     window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
         if (arguments.length === 1 && messageOrEvent) {
-            const errorEventLike = createErrorEventLike(messageOrEvent);
-            const errorLogEvent = createErrorLogEvent(errorEventLike);
-            postLogEvent(errorLogEvent);
+            const convertedErrorEvent = createErrorEventLike(messageOrEvent);
+            const convertedErrorLogEvent = createErrorLogEvent(convertedErrorEvent);
+            postLogEvent(logApiUri, convertedErrorLogEvent);
         }
         else {
             const errorEventLike = createErrorEventLike(messageOrEvent, source, lineno, colno, error);
             const errorLogEvent = createErrorLogEvent(errorEventLike);
-            postLogEvent(errorLogEvent);
+            postLogEvent(logApiUri, errorLogEvent);
         }
     };
 
-    const logger = {};
     logger.log = wrapConsole('log', logApiUri);
     logger.info = wrapConsole('info', logApiUri);
     logger.warn = wrapConsole('warn', logApiUri);
