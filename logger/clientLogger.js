@@ -1,50 +1,58 @@
-const axios = require("axios");
-const prepper = require("prepper");
-const {Merge, System, Timestamp} = prepper.handlers;
+import axios from "axios";
 
-const messageHandler = postApiUri => (event) => {
-    const data = Object.assign({}, event, {
-        displayTracer: "tracer" in event ? event.tracer.substr(0, 6) : '------',
-        displayLevel: event.level.toUpperCase(),
-        timestamp: event.timestamp.toLocaleString(),
-        details: Object.keys(event).length ? `\n ${JSON.stringify(event, null, 2)}` : ''
-    });
-    const log = console[event.level] || console.info; // eslint-disable-line no-console
-    log(data);
-    axios.post(postApiUri)
-        .catch(error => console.error(error)); //If failed to post error to the logger service endpoint, display and error
+/**
+ * This function creates and error event like object or if it's supplied with a proper error event, it then it returns an error event.
+ * @param {string} messageOrEvent
+ * @param {string} filename
+ * @param {number} lineno
+ * @param {number} colno - column number (# of the letter where the error occurred)
+ * @param {Error} error
+ * @return {*}
+ */
+const createErrorEventLike = (messageOrEvent, filename, lineno, colno, error) => {
+    if (error && error.stack && error.message) return error;
+    if (messageOrEvent && messageOrEvent.stack && messageOrEvent.message) return messageOrEvent;
+    return {
+        message: messageOrEvent && messageOrEvent instanceof String ? messageOrEvent : "Undefined client-side error",
+        stack: filename && lineno && colno ?`at ${filename}:${lineno}:${colno}` : "No stack trace available for this error"
+    };
 };
 
-module.exports= (logApiUri) => {
+const createErrorLogEvent = (errorEventLike)=> {
+    return {
+        messageSource: "client",
+        timestamp: Date.now(),
+        userAgentString: navigator.userAgent,
+        url: window.location.href,
+        error: errorEventLike,
+        level: "error"
+    };
+};
 
-    const logger = new prepper.Logger({ handlers: [
-        new Merge({ package: "client" }),
-        // new handlers.Merge({ someAddedInfo: "Plus info"}),
-        // new handlers.Merge({ service: { env: process.env.SERVICE_ENV } }),
-        // new handlers.Process(),
-        new System(),
-        new Timestamp(),
-    ]}).on('message', event => {
-        messageHandler(logApiUri)(event);
-    });
+const postLogEvent = (logApiUri, logEvent) => {
+    axios
+        .post(logApiUri, logEvent)
+        .catch(error => console.error(error, "Cant send error reports to server!"));
+};
+
+const createLogger = (logApiUri) => {
+
+    const logger = console;
 
     window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
-        if (arguments.length = 1 && messageOrEvent) {
-            logger.error(messageOrEvent);
-            if ( messageOrEvent instanceof String ) {
-                logger.error(new Error(messageOrEvent));
-            }
-            else logger.error(messageOrEvent);
+        if (arguments.length === 1 && messageOrEvent) {
+            const errorEventLike = createErrorEventLike(messageOrEvent);
+            const errorLogEvent = createErrorLogEvent(errorEventLike);
+            postLogEvent(errorLogEvent);
         }
         else {
-            const errorDescriptor = {
-                url: document.location.href,
-                message: messageOrEvent,
-                source, lineno, colno, error
-            };
-            logger.error(Object.assign(errorDescriptor, { error: new Error(messageOrEvent) }));
+            const errorEventLike = createErrorEventLike(messageOrEvent, source, lineno, colno, error);
+            const errorLogEvent = createErrorLogEvent(errorEventLike);
+            postLogEvent(errorLogEvent);
         }
     };
 
     return logger;
 };
+
+export default createLogger;
