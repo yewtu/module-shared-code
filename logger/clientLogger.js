@@ -54,8 +54,7 @@ const postLogEvent = (logApiUri, logEvent) => {
 
 const createLogger = (logApiUri) => {
 
-    const logger = console;
-
+    // Maybe this needs to be separated to a function like listenToGlobalErrors?
     window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
         if (arguments.length === 1 && messageOrEvent) {
             const errorEventLike = createErrorEventLike(messageOrEvent);
@@ -69,35 +68,38 @@ const createLogger = (logApiUri) => {
         }
     };
 
-    logger.log = wrapConsole('log');
-    logger.info = wrapConsole('info');
-    logger.warn = wrapConsole('warn');
-    logger.debug = wrapConsole('debug');
-    logger.trace = wrapConsole('trace');
-    logger.error = wrapConsole('error');
+    const logger = {};
+    logger.log = wrapConsole('log', logApiUri);
+    logger.info = wrapConsole('info', logApiUri);
+    logger.warn = wrapConsole('warn', logApiUri);
+    logger.debug = wrapConsole('debug', logApiUri);
+    logger.trace = wrapConsole('trace', logApiUri);
+    logger.error = wrapConsole('error', logApiUri);
 
     return logger;
 };
 
 const wrapConsole = ( level, logApiUrl ) => ( ...args ) => {
-    const levels = [ "warn", "info", "debug", "trace", "log", "error" ];
+    const levels = [ "warn", "info", "debug", "trace", "log" ];
     if (!args) return;
+    const arg = args.length === 1 ? args[0] : null;
     switch ( true ) {
         case level === "error": {
-            console.error( args.length === 1 ? args[0] : args);
-            const errorEventLike = createErrorEventLike(args);
+            console.error( arg || "" );
+            const errorEventLike = createErrorEventLike(arg || "");
             const errorLogEvent = createErrorLogEvent(errorEventLike);
             postLogEvent(logApiUrl, errorLogEvent);
             break;
         }
-        case levels.incudes(level): {
-            console[level](args);
-            const logEvent = createLogEvent(level, args);
+        case levels.includes(level): {
+            console[level](arg || args);
+            const logEvent = createLogEvent(level, arg || args);
             postLogEvent(logApiUrl, logEvent);
             break;
         }
         default: {
-            const logEvent = createLogEvent(level, args);
+            const logEvent = createLogEvent(level, arg || args);
+            console.log(arg || args);
             postLogEvent(logApiUrl, logEvent);
             break;
         }
