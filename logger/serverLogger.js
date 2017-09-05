@@ -48,8 +48,29 @@ module.exports = () => {
 
     return {
         logger,
-        handleLogReques: ( req, res ) => {
+        //TODO: show in documentations that this function needs express bodyparser.json()
+        handleLogRequte: ( req, res ) => {
+            const { event } = req;
+            if(!event) {
+                //TODO: should check event schema with Joi
+                res.status(400).send();
+                return;
+            }
+            onMessage(event);
+        },
+        logMiddleWare: (req, res, next) => {
+            const {url,method,headers,parms} = req;
+            const logger = req.app.locals.logger.child({ handlers: [
+                new handlers.Tracer(),
+                new handlers.Merge(pick(req, ['url', 'method', 'headers', 'params']), { key: 'request' })
+            ]});
 
+            onHeaders(res, () => {
+                const response = { response: { statusCode: res.statusCode, headers: res.headers } };
+                if (res.statusCode === 400) logger.error(req.url, response);
+                if (res.statusCode < 500) logger.info(req.url, response);
+                else logger.error(req.url, response);
+            });
         },
         listenToGlobalUncaughtErrors: () => {
             process.on('uncaughtException', function ( err ) {
