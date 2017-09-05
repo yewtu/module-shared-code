@@ -29,6 +29,23 @@ const createErrorLogEvent = (errorEventLike)=> {
     };
 };
 
+const createLogEvent = (level, msg)=> {
+    let parsedMsg;
+    try {
+        parsedMsg = msg instanceof String ? msg : JSON.stringify(msg);
+    } catch (e) {
+        parsedMsg = "Unable to parse log msg";
+    }
+    return {
+        messageSource: "client",
+        msg: parsedMsg,
+        timestamp: Date.now(),
+        userAgentString: navigator.userAgent,
+        url: window.location.href,
+        level,
+    };
+};
+
 const postLogEvent = (logApiUri, logEvent) => {
     axios
         .post(logApiUri, logEvent)
@@ -52,7 +69,39 @@ const createLogger = (logApiUri) => {
         }
     };
 
+    logger.log = wrapConsole('log');
+    logger.info = wrapConsole('info');
+    logger.warn = wrapConsole('warn');
+    logger.debug = wrapConsole('debug');
+    logger.trace = wrapConsole('trace');
+    logger.error = wrapConsole('error');
+
     return logger;
+};
+
+const wrapConsole = ( level, logApiUrl ) => ( ...args ) => {
+    const levels = [ "warn", "info", "debug", "trace", "log", "error" ];
+    if (!args) return;
+    switch ( true ) {
+        case level === "error": {
+            console.error( args.length === 1 ? args[0] : args);
+            const errorEventLike = createErrorEventLike(args);
+            const errorLogEvent = createErrorLogEvent(errorEventLike);
+            postLogEvent(logApiUrl, errorLogEvent);
+            break;
+        }
+        case levels.incudes(level): {
+            console[level](args);
+            const logEvent = createLogEvent(level, args);
+            postLogEvent(logApiUrl, logEvent);
+            break;
+        }
+        default: {
+            const logEvent = createLogEvent(level, args);
+            postLogEvent(logApiUrl, logEvent);
+            break;
+        }
+    }
 };
 
 export default createLogger;
