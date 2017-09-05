@@ -50,7 +50,7 @@ const createLogEvent = (level, msg)=> {
 
 const postLogEvent = (logApiUri, logEvent) => {
     axios
-        .post(logApiUri, logEvent)
+        .post(logApiUri, { event: logEvent })
         .catch(error => console.error(error, "Cant send error reports to server!"));
 };
 
