@@ -15,7 +15,7 @@ const createErrorEventLike = (messageOrEvent, filename, lineno, colno, error) =>
     }
     if (messageOrEvent && messageOrEvent.stack && messageOrEvent.message) return messageOrEvent;
     return {
-        message: messageOrEvent && messageOrEvent instanceof String ? messageOrEvent : "Undefined client-side error",
+        message: messageOrEvent && typeof messageOrEvent === "string" ? messageOrEvent : "Undefined client-side error",
         stack: filename && lineno && colno ?`at ${filename}:${lineno}:${colno}` : "No stack trace available for this error"
     };
 };
@@ -34,7 +34,7 @@ const createErrorLogEvent = (errorEventLike)=> {
 const createLogEvent = (level, msg)=> {
     let parsedMsg;
     try {
-        parsedMsg = msg instanceof String ? msg : JSON.stringify(msg);
+        parsedMsg = typeof msg === "string" ? msg : JSON.stringify(msg);
     } catch (e) {
         parsedMsg = "Unable to parse log msg";
     }
