@@ -17,9 +17,9 @@ module.exports = ({details=false}) => {
         default: chalk.white
     };
 
-    const response = hogan.compile(`{{{messageSource}}}  {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} -  {{{method}}} {{{url}}} {{package.name}} {{{request.method}}} {{{response.statusCode}}} {{{request.url}}}`);
-    const error = hogan.compile(`{{{messageSource}}}  {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} -  {{{method}}} {{{url}}} {{package.name}} {{{message}}} {{{code}}}\n{{{error.stack}}}`);
-    const info = hogan.compile(`{{{messageSource}}}  {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} -  {{{method}}} {{{url}}} {{package.name}} {{{message}}} {{{${details?"details":""}}}}`);
+    const response = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{request.method}}} {{{response.statusCode}}} {{{request.url}}}`);
+    const error = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{code}}}\n{{{error.stack}}}`);
+    const info = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{${details?"details":""}}}}`);
 
     const onMessage = (event) => {
         const timestamp = (new Date(event.timestamp || Date.now) ).toLocaleString();
@@ -31,6 +31,7 @@ module.exports = ({details=false}) => {
             details: Object.keys(event).length ? `\n ${JSON.stringify(event, null, 2)}` : '',
             method: event.method || '',
             url: event.url || '',
+            msg: event.msg || '',
         });
         const colour = colours[event.level] || colours.default;
         const log = console[event.level] || console.info; // eslint-disable-line no-console
