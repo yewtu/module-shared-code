@@ -5,6 +5,15 @@
   "repository": "git@github.com:yewtu/module-shared-code.git",
   "author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
   "license": "MIT",
+  "scripts": {
+    "build:logger": "babel ./logger --out-dir ./dist/logger --presets env,react",
+    "watch:logger": "babel ./logger --out-dir ./dist/logger --presets env,react --watch"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "babel-register": "^6.24.1",
