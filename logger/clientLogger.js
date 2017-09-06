@@ -54,33 +54,6 @@ const postLogEvent = (logApiUri, logEvent) => {
         .catch(error => console.error(error, "Cant send error reports to server!"));
 };
 
-const createLogger = (logApiUri) => {
-
-    const logger = {};
-
-    // TODO: maybe this should be separated to an other function named "listenToUncaughtErrors or logUncaughtErrors"
-    window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
-        if (arguments.length === 1 && messageOrEvent) {
-            const convertedErrorEvent = createErrorEventLike(messageOrEvent);
-            const convertedErrorLogEvent = createErrorLogEvent(convertedErrorEvent);
-            postLogEvent(logApiUri, convertedErrorLogEvent);
-        }
-        else {
-            const errorEventLike = createErrorEventLike(messageOrEvent, source, lineno, colno, error);
-            const errorLogEvent = createErrorLogEvent(errorEventLike);
-            postLogEvent(logApiUri, errorLogEvent);
-        }
-    };
-
-    logger.log = wrapConsole('log', logApiUri);
-    logger.info = wrapConsole('info', logApiUri);
-    logger.warn = wrapConsole('warn', logApiUri);
-    logger.debug = wrapConsole('debug', logApiUri);
-    logger.trace = wrapConsole('trace', logApiUri);
-    logger.error = wrapConsole('error', logApiUri);
-
-    return logger;
-};
 
 const wrapConsole = ( level, logApiUrl ) => ( ...args ) => {
     const levels = [ "warn", "info", "debug", "trace", "log" ];
@@ -109,4 +82,38 @@ const wrapConsole = ( level, logApiUrl ) => ( ...args ) => {
     }
 };
 
-export default createLogger;
+export default (loginApiUri) => {
+    if (!loginApiUri) throw new Error("No log URI given");
+    return {
+        listenToUncaughtErrors: (reportUri=loginApiUri) => {
+
+            window.onerror = function ( messageOrEvent, source, lineno, colno, error ) {
+                if ( arguments.length === 1 && messageOrEvent ) {
+                    const convertedErrorEvent = createErrorEventLike(messageOrEvent);
+                    const convertedErrorLogEvent = createErrorLogEvent(convertedErrorEvent);
+                    postLogEvent(reportUri, convertedErrorLogEvent);
+                }
+                else {
+                    const errorEventLike = createErrorEventLike(messageOrEvent, source, lineno, colno, error);
+                    const errorLogEvent = createErrorLogEvent(errorEventLike);
+                    postLogEvent(reportUri, errorLogEvent);
+                }
+            };
+        },
+
+        createLogger: ( reportUri=loginApiUri ) => {
+
+            const logger = {};
+
+            logger.log = wrapConsole('log', reportUri);
+            logger.info = wrapConsole('info', reportUri);
+            logger.warn = wrapConsole('warn', reportUri);
+            logger.debug = wrapConsole('debug', reportUri);
+            logger.trace = wrapConsole('trace', reportUri);
+            logger.error = wrapConsole('error', reportUri);
+
+            return logger;
+        }
+    };
+};
+
