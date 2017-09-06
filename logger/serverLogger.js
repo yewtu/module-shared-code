@@ -22,7 +22,7 @@ module.exports = ({details=false}) => {
     const info = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{${details?"details":""}}}}`);
 
     const onMessage = (event) => {
-        const timestamp = (new Date(event.timestamp || Date.now) ).toLocaleString();
+        const timestamp = (new Date(event.timestamp || Date.now()) ).toLocaleString();
         const data = Object.assign({}, event, {
             messageSource: event.messageSource && typeof event.messageSource === "string" ? event.messageSource.toUpperCase() : "SERVER",
             displayTracer: "tracer" in event ? event.tracer.substr(0, 6) : '------',
