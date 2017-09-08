@@ -5,7 +5,7 @@ In contrary to the serverLogger, the clientLogger is written in ES6 so it needs 
 
 Usage:
 ```
-import ClientLogger from "../node_modules/module-shared-code/logger/clientLogger";
+import { ClientLogger } from "module-shared-code";
 const clientLogger = ClientLogger("/log"); //post the log info to /log
 
 clientLogger.listenToUncaughtErrors();
@@ -35,18 +35,16 @@ Detailed information is only displayed on the back-end when the serverLogger is 
 This module doesn't need transpilation on `node 8.1`. 
 
 #### Usage
-
-serverRouter needs `body-parser` or a `body` property in the request object.
+The creation of the logger requires an express app instance.
 ```
-const ServerLogger = require(`${cwd}/node_modules/module-shared-code/logger/serverLogger`);
-const serverLogger = ServerLogger({ details: false });
+const { ServerLogger } = require("module-shared-code");
+const serverLogger = ServerLogger(app, { details: false }); //where app is an express app
 
 const {logger} = serverLogger;
 // the logger doesn't need to be created in the server side because 
 // it can only log to stdout and std error (based on the log level)
 
-app.use(bodyParser.json());
-app.use(serverLogger.logMiddleWare); 
+serverLogger.listenToHttp()
 // listen for HTTP packets
 
 serverLogger.listenToGlobalUncaughtErrors()
