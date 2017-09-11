@@ -8,6 +8,4 @@ module.exports = {
 	appLoginRoutes,
 	apiAuthMiddleware,
 	AdminRoutes,
-	ClientLogger,
-	ServerLogger,
 };
