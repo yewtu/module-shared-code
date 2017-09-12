@@ -20,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return {*}
  */
 var createErrorEventLike = function createErrorEventLike(messageOrEvent, filename, lineno, colno, error) {
+    console.log(messageOrEvent, filename, lineno, colno, error);
     if (error && error.stack && error.message) {
         return { stack: error.stack, message: error.message };
     }

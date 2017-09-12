@@ -32,22 +32,23 @@ The logger wraps every logging method that `console` has (eg.: `logger.info()`).
 Detailed information is only displayed on the back-end when the serverLogger is created with {details:true}.
 
 ### serverLogger
-This module doesn't need transpilation on `node 8.1`. 
 
 #### Usage
 The creation of the logger requires an express app instance.
 ```
 const { ServerLogger } = require("module-shared-code");
 const serverLogger = ServerLogger(app, { details: false }); //where app is an express app
+// this step also applies the serverLogger's built in middleware to the Express app intance
+// incoming http communication will be displayed in the logger
+
 
 const {logger} = serverLogger;
 // the logger doesn't need to be created in the server side because 
 // it can only log to stdout and std error (based on the log level)
 
-serverLogger.listenToHttp()
-// listen for HTTP packets
-
 serverLogger.listenToGlobalUncaughtErrors()
+// this will catch global errors, log them and send a SIGINT signal (process.die()), 
+// so the server may die gracefully if graceful shutdown is implemented
 
 app.post('/log', serverLogger.handleLogRoute); 
 // listen for clientRouter
