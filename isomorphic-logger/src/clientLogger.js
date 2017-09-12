@@ -10,7 +10,6 @@ import axios from "axios";
  * @return {*}
  */
 const createErrorEventLike = (messageOrEvent, filename, lineno, colno, error) => {
-    console.log( messageOrEvent, filename, lineno, colno, error );
     if (error && error.stack && error.message) {
         return {stack: error.stack, message: error.message};
     }
