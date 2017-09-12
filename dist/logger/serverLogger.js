@@ -80,7 +80,6 @@ module.exports = function (app, _ref) {
     return {
         logger: logger,
         listenToHttp: function listenToHttp() {
-            app.use(bodyParser.json());
             app.use(createLogMiddleWare(logger));
         },
         handleLogRoute: function handleLogRoute(req, res) {

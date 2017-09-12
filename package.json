@@ -6,8 +6,8 @@
   "author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
   "license": "MIT",
   "scripts": {
-    "build:client-logger": "babel ./isomorphic-logger/src/clientLogger.js --out-file ./isomorphic-logger/client/index.js --presets env,react",
-    "build:server-logger": "babel ./isomorphic-logger/src/serverLogger.js --out-file ./isomorphic-logger/server/index.js --presets env,react"
+    "build:logger": "babel ./logger --out-dir ./dist/logger --presets env,react",
+    "watch:logger": "babel ./logger --out-dir ./dist/logger --presets env,react --watch"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
