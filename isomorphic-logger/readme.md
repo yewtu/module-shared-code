@@ -5,7 +5,7 @@ In contrary to the serverLogger, the clientLogger is written in ES6 so it needs 
 
 Usage:
 ```
-import { ClientLogger } from "module-shared-code";
+import ClientLogger from "module-shared-code/isomorphic-logger/client";
 const clientLogger = ClientLogger("/log"); //post the log info to /log
 
 clientLogger.listenToUncaughtErrors();
@@ -37,7 +37,7 @@ This module doesn't need transpilation on `node 8.1`.
 #### Usage
 The creation of the logger requires an express app instance.
 ```
-const { ServerLogger } = require("module-shared-code");
+const ServerLogger = require("module-shared-code/isomorphic-logger/server");
 const serverLogger = ServerLogger(app, { details: false }); //where app is an express app
 
 const {logger} = serverLogger;
