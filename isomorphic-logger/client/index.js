@@ -23,7 +23,11 @@ var createErrorEventLike = function createErrorEventLike(messageOrEvent, filenam
     if (error && error.stack && error.message) {
         return { stack: error.stack, message: error.message };
     }
-    if (messageOrEvent && messageOrEvent.stack && messageOrEvent.message) return messageOrEvent;
+    if (messageOrEvent && messageOrEvent.stack && messageOrEvent.message) return { // if valid Error object
+        message: messageOrEvent.message,
+        stack: messageOrEvent.stack
+    }; // this object must be created with the two keys explicitly set, instead of returning the error object itself
+    // Error objects cannot be sent with AJAX requests (and can't be JSON.stringified)
     return {
         message: messageOrEvent && typeof messageOrEvent === "string" ? messageOrEvent : "Undefined client-side error",
         stack: filename && lineno && colno ? "at " + filename + ":" + lineno + ":" + colno : "No stack trace available for this error"
