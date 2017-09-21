@@ -47,6 +47,7 @@
 		"role": "farmer",
 		"displayName": "Grosvenor Farms",
 		"userName": "grosvenorfarms",
+		"farm": "grosvenor-farm",
 		"linkedFarms": [
 			"grosvenor-farm"
 		],
