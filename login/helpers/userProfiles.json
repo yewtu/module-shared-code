@@ -47,9 +47,9 @@
 		"role": "farmer",
 		"displayName": "Grosvenor Farms",
 		"userName": "grosvenorfarms",
-		"farm": "grosvenor-farm",
+		"farm": "grosvenor-farms",
 		"linkedFarms": [
-			"grosvenor-farm"
+			"grosvenor-farms"
 		],
 		"b2cStore": false,
 		"avatarFile": "avatar-grosvenorfarms.jpg"
