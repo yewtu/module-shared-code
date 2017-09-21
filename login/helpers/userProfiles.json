@@ -43,6 +43,16 @@
 		"b2cStore": false,
 		"avatarFile": "avatar-saffronbadger.jpg"
 	},
+	"grosvenorfarms": {
+		"role": "farmer",
+		"displayName": "Grosvenor Farms",
+		"userName": "grosvenorfarms",
+		"linkedFarms": [
+			"grosvenor-farm"
+		],
+		"b2cStore": false,
+		"avatarFile": "avatar-grosvenorfarms.jpg"
+	},
 	"test": {
 		"role": "test-user",
 		"displayName": "Test User",
