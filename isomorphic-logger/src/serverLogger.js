@@ -27,7 +27,7 @@ module.exports = (app, {details=false}) => {
     };
 
     const response = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{request.method}}} {{{response.statusCode}}} {{{request.url}}}`);
-    const error = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{code}}}\n{{{error.stack}}}`);
+    const error = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} \n{{{error.message}}} \n{{{error.stack}}}`);
     const info = hogan.compile(`{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{${shouldLogDetails?"details":""}}}}`);
 
     const onMessage = (event) => {

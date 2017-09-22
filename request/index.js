@@ -9,6 +9,9 @@ var requestConfig = function requestConfig(options) {
         auth: {
             username: options.userName,
             password: options.password
+        },
+        onError: function onError(err) {
+            console.log({ err: err });
         }
     });
     if (typeof window !== 'undefined') updatedOptions.headers['X-Requested-With'] = 'XMLHttpRequest';
