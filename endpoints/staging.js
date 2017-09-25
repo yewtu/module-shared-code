@@ -2,7 +2,7 @@ module.exports = {
     resources: [
 		{
 			name: "app-b2c-store",
-			URI: "http://app-b2c-store-staging.herokuapp.com"
+			URI: "https://app-b2c-store-staging.herokuapp.com"
 
 		},
 		{
@@ -12,32 +12,32 @@ module.exports = {
 		},
 		{
 			name: "app-marketplace",
-			URI: "http://app-marketplace-staging.herokuapp.com"
+			URI: "https://app-marketplace-staging.herokuapp.com"
 
 		},
 		{
 			name: "app-shopfront",
-			URI: "http://app-b2c-shopfront-staging.herokuapp.com"
+			URI: "https://app-b2c-shopfront-staging.herokuapp.com"
 
 		},
 		{
 			name: "service-b2c-store",
-			URI: "http://service-b2c-store-staging.herokuapp.com"
+			URI: "https://service-b2c-store-staging.herokuapp.com"
 
 		},
 		{
 			name: "app-cow-publisher",
-			URI: "http://app-cow-publisher-staging.herokuapp.com"
+			URI: "https://app-cow-publisher-staging.herokuapp.com"
 
 		},
 		{
 			name: "app-b2b-marketplace",
-			URI: "http://app-b2b-marketplace-staging.herokuapp.com"
+			URI: "https://app-b2b-marketplace-staging.herokuapp.com"
 
 		},
 		{
 			name: "service-b2b-marketplace",
-			URI: "http://service-b2b-market-staging.herokuapp.com"
+			URI: "https://service-b2b-market-staging.herokuapp.com"
 		},
         {
             name: "app-imploder",
