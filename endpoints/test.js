@@ -16,7 +16,7 @@ module.exports = {
 
 		},
 		{
-			name: "app-shopfront",
+			name: "app-b2c-shopfront",
 			URI: "https://app-b2c-shopfront-test.herokuapp.com"
 
 		},
