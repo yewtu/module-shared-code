@@ -1,68 +1,70 @@
-const axios = require('axios');
+'use strict';
 
-// catch here or axios will create a much more verbose error message
-// add option to not rethrow the error. This is useful if the caller is a Promise.all and we want to collect all
-// successful requests as well as this failure
-const logError = function (err, endpoint, options) {
-	options = options || {};
-	if (!options.noLog) {
-		console.error(err.response && err.response.status, 'endpoint: ' + endpoint + ', ' + err.stack);
-		err.logged = true;
-	}
-	if (options.noRethrowErrors) return err;
-	throw err;
+var axios = require('axios');
+
+var requestConfig = function requestConfig(options) {
+    options = options || {};
+    var updatedOptions = Object.assign({}, options, {
+        headers: options.headers || {},
+        auth: {
+            username: options.userName,
+            password: options.password
+        },
+        onError: function onError(err) {
+            console.log({ err: err });
+        }
+    });
+    if (typeof window !== 'undefined') updatedOptions.headers['X-Requested-With'] = 'XMLHttpRequest';
+    return updatedOptions;
 };
 
-const requestConfig = function (options) {
-	options = options || {};
-	const updatedOptions = Object.assign({}, options, {
-		headers: options.headers || {},
-		auth: {
-			username: options.userName,
-			password: options.password
-		}
-	});
-	if (typeof window !== 'undefined') updatedOptions.headers['X-Requested-With'] = 'XMLHttpRequest';
-	return updatedOptions;
-};
+function requestFactory() {
+    var _this = this;
 
-module.exports = {
-	get: function (endpoint, options) {
-		return axios.get(endpoint, requestConfig(options))
-			.then(function (response) {
-				return response.data;
-			})
-			.catch(function (err) {
-				logError(err, endpoint, options)
-			});
-	},
+    var catchError = function catchError(endPoint, method) {
+        return function (err) {
+            if (err.message === "Network Error") {
+                var detailedNetworkErr = new Error('Network error using ' + method + ' to access ' + endPoint);
+                _this.logger.error(detailedNetworkErr);
+                return Promise.reject(detailedNetworkErr);
+            } else {
+                _this.logger.error(err);
+                return Promise.reject(err);
+            }
+        };
+    };
 
-	post: function (endpoint, data, options) {
-		options = options || {};
-		return axios.post(endpoint, data, requestConfig(options))
-			.then(function (response) {
-				return response.data;
-			})
-			.catch(function (err) {
-				logError(err, endpoint, options)
-			});
-	},
+    var pickData = function pickData(response) {
+        return response.data;
+    };
+    this.logger = console;
 
-	put: function (endpoint, data, options) {
-		options = options || {};
-		return axios.put(endpoint, data, requestConfig(options))
-			.then(function (response) {
-				return response.data;
-			})
-			.catch(function (err) {
-				logError(err, endpoint, options)
-			});
-	},
+    return {
+        get: function get(endpoint, options) {
+            return axios.get(endpoint, requestConfig(options)).then(pickData).catch(catchError(endpoint, "GET"));
+        },
 
-	del: function (endpoint, options) {
-		return axios.delete(endpoint, requestConfig(options))
-			.catch(function (err) {
-				logError(err, endpoint, options)
-			});
-	}
+        post: function post(endpoint, data, options) {
+            options = options || {};
+            return axios.post(endpoint, data, requestConfig(options)).then(pickData).catch(catchError(endpoint, "POST"));
+        },
+
+        put: function put(endpoint, data, options) {
+            options = options || {};
+            return axios.put(endpoint, data, requestConfig(options)).then(pickData).catch(catchError(endpoint, "PUT"));
+        },
+
+        del: function del(endpoint, options) {
+            return axios.delete(endpoint, requestConfig(options)).catch(catchError(endpoint, "DELETE"));
+        },
+        useLogger: function useLogger() {
+            var logger = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : console;
+
+            if ("log" in logger && "error" in logger) {
+                _this.logger = logger;
+            }
+        }
+    };
 }
+
+module.exports = requestFactory.call({});

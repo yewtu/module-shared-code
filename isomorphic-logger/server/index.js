@@ -32,7 +32,7 @@ module.exports = function (app, _ref) {
     };
 
     var response = hogan.compile("{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{request.method}}} {{{response.statusCode}}} {{{request.url}}}");
-    var error = hogan.compile("{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{code}}}\n{{{error.stack}}}");
+    var error = hogan.compile("{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} \n{{{error.message}}} \n{{{error.stack}}}");
     var info = hogan.compile("{{{messageSource}}} {{{displayTracer}}} {{{displayLevel}}} - {{{timestamp}}} - {{{method}}} {{{url}}} - {{{msg}}} {{package.name}} {{{message}}} {{{" + (shouldLogDetails ? "details" : "") + "}}}");
 
     var onMessage = function onMessage(event) {

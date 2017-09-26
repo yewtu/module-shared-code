@@ -8,7 +8,8 @@
   "scripts": {
     "build:iso-logger": "yarn build:client-logger && yarn build:server-logger",
     "build:client-logger": "babel ./isomorphic-logger/src/clientLogger.js --out-file ./isomorphic-logger/client/index.js --presets env,react",
-    "build:server-logger": "babel ./isomorphic-logger/src/serverLogger.js --out-file ./isomorphic-logger/server/index.js --presets env,react"
+    "build:server-logger": "babel ./isomorphic-logger/src/serverLogger.js --out-file ./isomorphic-logger/server/index.js --presets env,react",
+    "build:request": "babel ./request/src/request.js --out-file ./request/index.js --presets env,react"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
